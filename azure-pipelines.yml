@@ -3,14 +3,16 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javaresources:
 
-# pool:
-#  name: DockerPipeline
+pool:
+  name: Default
 
 
 variables:
   artifactsName: zg-app
   dockerRegistry: gangreg.azurecr.io
   imageName: my-app
+  webAppNameInDev: gang-dev
+  webAppNameInProd: gang-prod
 
 
 stages:
@@ -100,7 +102,7 @@ stages:
                 - task: AzureWebAppContainer@1
                   inputs:
                     azureSubscription: 'Azure subscription 1(f7bbcd42-b266-4f66-8b52-6560836a7702)'
-                    appName: 'gang-dev'
+                    appName: '$(webAppNameInDev)'
                     containers: '$(dockerRegistry)/$(imageName):$(Build.BuildId)'
             postRouteTraffic:
               steps:
@@ -134,7 +136,7 @@ stages:
                 - task: AzureWebAppContainer@1
                   inputs:
                     azureSubscription: 'Azure subscription 1(f7bbcd42-b266-4f66-8b52-6560836a7702)'
-                    appName: 'gang-pro'
+                    appName: '$(webAppNameInProd)'
                     containers: '$(dockerRegistry)/$(imageName):$(Build.BuildId)'
             postRouteTraffic:
               steps:
