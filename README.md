@@ -13,7 +13,9 @@
   - Environment: create environment for project, e.g. dev, prod
   - Project setting
     - Agent pools: setup cicd via self-hosted agent or purchase Azure hosted agent. 
-	- Service connections: new service connection -> Docker registry or github -> Azure Container registry(created at step 2) -> service principle -> ... -> service connection name(e.g. abc)
+	- Service connections: 
+	  - Docker registry: new service connection -> Docker registry or github -> Azure Container registry(created at step 2) -> service principle -> ... -> service connection name(e.g. abc)
+	  - Azure resource manager: new service connection -> Azure resource manager -> Service principal(automatic) -> Subscription -> ... -> service connection name(e.g. bcd/Azure subscription 1)
   - Edit azure-pipeline.yml if needed and trigger it.
   
-  
+4. For Java 17, refer to https://github.com/Zhou6ang/springboot-ddd-example
